@@ -13,6 +13,12 @@
             });
         };
 
+        self.getters = {
+            name: function () {
+                return value.name.length;
+            }
+        }
+
         self.filterParts = function (part) {
             if (!self.search) {
                 return true;

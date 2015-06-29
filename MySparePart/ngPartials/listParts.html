@@ -1,7 +1,33 @@
 ﻿<div class="container">
 
     <a href="/addPart"> New Part </a>
-    <table ng-cloak="true" class="table table-responsive">
+
+
+
+    <table st-table="rowCollection" class="table table-striped" ng-cloak="true">
+        <thead>
+            <tr>
+                <th st-sort="getters.name">name</th>
+                <th st-sort="partNumber">part number</th>
+                <th st-sort="description">description</th>
+                <th st-sort="quanity">quanity</th>
+                <!--<th st-sort="quanity" st-skip-natural="true">balance</th>-->
+                <!--<th>main.part.partOwner</th>-->
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="part in main.parts" ng-click="main.showDetails(part.id)">
+                <td>{{main.part.name | uppercase}}</td>
+                <td>{{main.part.partNumber}}</td>
+                <td>{{main.part.description}}</td>
+                <td>{{main.part.quanity}}</td>
+                <!--<td><a ng-href="mailto:{{row.email}}">email</a></td>-->
+                </
+            </tr>
+        </tbody>
+    </table>
+
+    <!--<table ng-cloak="true" class="table table-responsive">
         <thead>
             <tr>
                 <th>
@@ -29,7 +55,7 @@
                 <td>{{part.description}}</td>
             </tr>
         </tbody>
-    </table>
+    </table>-->
 
 
 </div>

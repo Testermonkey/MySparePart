@@ -7,7 +7,8 @@
         self.parts = PartService.getParts();
 
         self.addPart = function () {
-            PartService.addPart(self.newPart).then(function () {
+            PartService.addPart(self.newPart)
+            .then(function () {
                 $location.path('/');
             });
         };
@@ -49,7 +50,7 @@
             $modalInstance.dismiss('cancel');
         };
 
-        self.editSave = function () {
+        self.save = function () {
             PartService.editPart(self.part)
             .then(function () {
                 $location.path('/');

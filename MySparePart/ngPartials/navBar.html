@@ -1,0 +1,61 @@
+﻿<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">MySparePart</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+
+                <li><a href="#">Link</a></li>
+
+
+                <li class="btn-group" dropdown is-open="status.isopen">
+                    <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+                        Button dropdown <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Diode</a></li>
+                        <li><a href="#">Resistor</a></li>
+                        <li><a href="#">Inductor</a></li>
+                        <li><a href="#">Capacitor</a></li>
+                        <li><a href="#">I.C.</a></li>
+                        <li><a href="#">L>E>D></a></li>
+                        <li><a href="#">Mechanical</a></li>
+                        <li><a href="#">Resistor</a></li>
+                        <li><a href="#">Vintage</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">What is this?</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <form class="navbar-form navbar-left" role="search">
+                        <!--consider autoType-->
+
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search" ng-model="main.search">
+                        </div>
+                        <!--<button type="submit" class="btn btn-default">Submit</button>-->
+                    </form>
+                </li>
+                <li>
+                    <ul class="nav navbar-nav navbar-right">
+                        <!--If logged in show welcome <userName>-->
+                        <!--and stats Parts listed/ parts requested/ parts sent / parts recieved-->
+                        <li><a href="#">Login</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>

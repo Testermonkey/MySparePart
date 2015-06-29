@@ -1,19 +1,18 @@
-﻿
-
-       
-        {{modal.part.name}}
+﻿{{modal.part.name}}
 <br />
-        {{modal.part.partNumber}}
+{{modal.part.partNumber}}
 <br />
-        {{modal.part.description}}
+{{modal.part.description}}
 <br />
 
-       
 
-        <!-- if PartOwner show this -->
-        <!-- if PartOwner show this -->
-        <a ng-click="modal.edit()"> edit </a>
+
+
+<!-- if PartOwner show this -->
+<a ng-click="modal.edit()"> edit </a>
 <br />
-
-        <!-- if !PartOwner && IsAuthenticated show this -->
-        <a ng-click="modal.request()">Request </a>
+<!-- if PartOwner && IsAuthenticated show this -->
+<a ng-click="modal.delete()"> New Part </a>
+<br />
+<!-- if !PartOwner && IsAuthenticated show this -->
+<a ng-click="modal.request()">Request </a>

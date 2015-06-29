@@ -270,6 +270,7 @@
     <Content Include="ngPartials\editPart.html" />
     <Content Include="ngPartials\listParts.html" />
     <Content Include="ngPartials\modalDetails.html" />
+    <Content Include="ngPartials\navBar.html" />
     <Content Include="ngPartials\requestPart.html" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-resource.js" />

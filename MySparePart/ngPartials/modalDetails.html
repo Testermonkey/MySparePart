@@ -1,17 +1,19 @@
 ﻿
 
-        {{modal.part.id}}
+       
         {{modal.part.name}}
+<br />
         {{modal.part.partNumber}}
+<br />
         {{modal.part.description}}
+<br />
 
-        //need modal details view
-        //  modal edit view
-        //  modal request view
+       
 
         <!-- if PartOwner show this -->
         <!-- if PartOwner show this -->
         <a ng-click="modal.edit()"> edit </a>
-        <a ng-click="modal.delete()"> Delete </a>   <!-- dont really CRUD delete, just mark IsHidden -->
+<br />
+
         <!-- if !PartOwner && IsAuthenticated show this -->
         <a ng-click="modal.request()">Request </a>

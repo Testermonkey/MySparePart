@@ -37,20 +37,38 @@
 
     angular.module('PartApp').controller('DetailViewModalController', function ($location, PartService, $modalInstance, id) {
         var self = this;
+        self.part = PartService.getPart(id);
         self.template = '/ngPartials/modalDetails.html'
 
-        self.part = PartService.getPart(id);  //.then(function(a){
-        //    debugger;
-        //});
+        //actions
         self.ok = function () {
             $modalInstance.close('close');
         };
+
         self.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
 
+        self.editSave = function () {
+            PartService.editPart(self.part)
+            .then(function () {
+                $location.path('/');
+            });
+        };
+
+        //Pages
         self.edit = function () {
             self.template = '/ngPartials/editPart.html';
-        }
+        };
+        self.details = function () {
+            self.template = '/ngPartials/modalDetails.html'
+        };
+        self.delete = function () {
+            self.template = '/ngPartials/deletePart.html'
+        };
+        self.request = function () {
+            self.template = '/ngpartials/request.html'
+        };
+
     });
 })();

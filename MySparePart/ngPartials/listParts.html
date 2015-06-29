@@ -1,0 +1,39 @@
+﻿<div class="container">
+    <h1>Base Index Page</h1>
+
+    <form>
+        <input ng-model="main.search" />
+    </form>
+    <a href="/addPart"> New Part </a>
+    <table ng-cloak="true" class="table table-responsive">
+        <thead>
+            <tr>
+                <th>
+                    Image
+                </th>
+
+                <th>
+                    Category
+                </th>
+
+                <th>
+                    Part Number
+                </th>
+
+                <th>
+                    Description
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="part in main.parts" ng-click="main.showDetails(part.id)">
+                <td><img ng-src="{{part.image}}"></td>
+                <td>{{part.name}}</td>
+                <td>{{part.partNumber}}</td>
+                <td>{{part.description}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+</div>

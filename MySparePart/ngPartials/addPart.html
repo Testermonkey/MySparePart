@@ -1,0 +1,36 @@
+﻿<form ng-submit="main.addPart()">
+    <div class="container">
+
+        <div>
+            <h1>Add part Page</h1>
+            <label> Name </label>
+            <input ng-model="main.newPart.name" />
+        </div>
+        <div>
+            <label> Part Number </label>
+            <input ng-model="main.newPart.partNumber" />
+        </div>
+        <div>
+
+            <label> Description </label>
+            <input ng-model="main.newPart.description" />
+        </div>
+        <div>
+
+            <label> Shipping Size </label>
+            <input ng-model="main.newPart.shippingSize" />
+        </div>
+        <div>
+
+            <label> Quanity </label>
+            <input ng-model="main.newPart.Quanity" />
+        </div>
+        <div>
+
+            <label> Catagory </label>
+            <input ng-model="main.newPart.catagory" />
+        </div>
+
+        <input type="submit" value="Save" />
+    </div>
+</form>

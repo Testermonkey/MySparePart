@@ -1,0 +1,32 @@
+﻿<form ng-submit="main.editpart()">
+    <div class="container">
+
+        <div>
+            <h1>Edit part Page</h1>
+            <label> Name </label>
+            <input ng-model="main.part.name" />
+        </div>
+        <div>
+            <label> Part Number </label>
+            <input ng-model="main.part.partNumber" />
+        </div>
+        <div>
+            <label> Description </label>
+            <input ng-model="main.part.description" />
+        </div>
+        <div>
+            <label> Shipping Size </label>
+            <input ng-model="main.part.shippingSize" />
+        </div>
+        <div>
+            <label> Quanity </label>
+            <input ng-model="main.part.Quanity" />
+        </div>
+        <div>
+            <label> Full Description </label>
+            <input ng-model="main.part.fullDescription" />
+        </div>
+
+        <input type="submit" value="Save" />
+    </div>
+</form>

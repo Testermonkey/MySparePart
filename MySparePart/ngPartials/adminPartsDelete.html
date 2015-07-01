@@ -20,7 +20,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="part in main.parts" | filter:part.IsDeleted>
+            <tr ng-repeat="part in deleteModal.parts" | filter:part.IsDeleted>
                 <td><img ng-src="{{part.image}}"></td>
                 <td>{{part.name}}</td>
                 <td>{{part.partNumber}}</td>

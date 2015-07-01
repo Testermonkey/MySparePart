@@ -42,12 +42,17 @@
 
         //start the adminPartsDelete modal with new DeletePartsController
         // Removes all parts from database where IsDeleted is true
-        self.adminPartsDelete = function () {
+        self.adminPartsDelete = function (parts) {
             $modal.open({
                 animation: true,
                 templateUrl: '/ngPartials/baseDeleteModal.html',
                 controller: 'DeletePartsController',
-                controllerAs: 'deleteModal'
+                controllerAs: 'deleteModal',
+                resolve: {
+                parts: function () {
+                    return parts;
+                }
+            }
             });
         };
     });
@@ -127,7 +132,7 @@
             };
 
             self.adminPartDeleteYes = function () {
-                PartServie.deletePart(self.part.id)
+                PartService.deletePart(self.part.id)
                 .then(function () {
                     $modalInstance.dismiss('cancel');
                 });
@@ -147,7 +152,7 @@
                 self.template = '/ngpartials/requestPart.html'
             };
             self.adminPartDelete = function () {
-                self.template = "/ngPartials/adminPartDelete.html"
+                self.template = "/ngPartials/adminPartDelete.html";
             };
 
         });

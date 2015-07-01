@@ -19,9 +19,9 @@
 <br />
 
 <!-- if PartOwner && IsAuthenticated show this -->
-<a ng-click="modal.deletePart(id)"> client delete(mark as hidden) </a>
+<a ng-click="modal.deletePart()"> client delete(mark as hidden) </a>
 <br />
 
 <!--only admins get to see this-->
-<a href="/ngPartials/adminPartDelete.html" ></a>
+<a ng-click="modal.adminPartDelete()">adminPartDelete</a>
 <br />

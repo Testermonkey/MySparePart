@@ -1,11 +1,4 @@
-﻿<div class="container">
-
-    <!--<a href="/addPart">AddPart</a>-->
-    <a ng-click="main.addPart()">AddPart</a>
-    <br />  
-    <a ng-click="main.adminPartsDelete()">AdminPartsDelete</a>
-
-
+﻿<div>
     <table ng-cloak="true" class="table table-responsive">
         <thead>
             <tr>
@@ -27,16 +20,17 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="part in main.parts" ng-click="main.showDetails(part.id)">
+            <tr ng-repeat="part in main.parts" | filter:part.IsDeleted>
                 <td><img ng-src="{{part.image}}"></td>
                 <td>{{part.name}}</td>
                 <td>{{part.partNumber}}</td>
                 <td>{{part.description}}</td>
             </tr>
-
-           
+            <tr>
+                <td><h2>Remove this part from the database?</h2></td>
+                <a ng-click="modal.deleteYes()"> Delete? </a>
+            </tr>
         </tbody>
     </table>
-
 
 </div>

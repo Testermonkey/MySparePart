@@ -54,11 +54,11 @@ namespace MySparePart.Migrations {
             //    new Blog {BlogText = "Zombie ipsum reversus ab viral inferno", BlogTitle = "Brains?", BlogModifiedTimeStamp = DateTime.Now, BlogTimeStamp=DateTime.Now}
             //},
             var Parts = new Part[]{
-                        new Part {Name="THERMAL FUSE",  ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Catagory="Capacitor" },
-                        new Part {Name="Infrared Encoder", ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Catagory="Capacitor" },
-                        new Part {Name="EMI Filter", ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Catagory="Capacitor" },
-                        new Part {Name="Air Flow Sensor", ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Catagory="Capacitor" },
-                        new Part {Name="Vacuum Sensor",  ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Catagory="Capacitor" }
+                        new Part {Name="THERMAL FUSE",  ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category= "Capacitor" },
+                        new Part {Name="Infrared Encoder", ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category="Capacitor" },
+                        new Part {Name="EMI Filter", ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category="Resistor" },
+                        new Part {Name="Air Flow Sensor", ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category="Capacitor" },
+                        new Part {Name="Vacuum Sensor",  ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category="Capacitor" }
                     };
 
             context.Parts.AddOrUpdate(p => p.Name, Parts);

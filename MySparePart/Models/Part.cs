@@ -34,7 +34,15 @@ namespace MySparePart.Models {
 
         public bool PartIsDeleted { get; set; }
 
-        public string Catagory { get; set; } //change to enum for select list
+        public string Category { get; set; }
+
+        //public enum Category {
+        //    Capacitor, Electrical_connector‎,
+        //    Photodetector‎, Transducer‎,
+        //    Resistors, Switches, Crystal,
+        //    Diode, LED, Transistor, MOV,
+        //    Voltage_Regulator, Mechanical
+        //} 
 
         public ICollection<PartRequest> PartRequest { get; set; } // For request tracking
         public Part() {

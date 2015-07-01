@@ -15,11 +15,12 @@ namespace MySparePart.API {
         private ApplicationDbContext _db = new ApplicationDbContext();
 
 
-
+      
         //    //// need to logout/login again to load claims
         //    //var claimsUser = this.User as ClaimsPrincipal;
         //    //var claims = claimsUser.Claims.ToList();
 
+      
 
         public IList<Part> GetParts() {
             var currentUser = new ApplicationUser();
@@ -72,7 +73,7 @@ namespace MySparePart.API {
                     original.Description = part.Description;
                     original.Quanity = part.Quanity;
                     original.ShippingSize = part.ShippingSize;
-                    original.Catagory = part.Catagory;
+                    original.Category = part.Category;
                     _db.SaveChanges();
                 }
              return Request.CreateResponse(HttpStatusCode.Created, part);
@@ -85,13 +86,21 @@ namespace MySparePart.API {
         }
 
         // [Authorize]
-        public void Delete(int id) {
+        public void DeletePart(int id) {
             var original = _db.Parts.Find(id);
             _db.Parts.Remove(original);
             _db.SaveChanges();
-
         }
 
+        public void clientDeletePart(int id) {
+            var original = _db.Parts.Find(id);
+            original.PartIsDeleted = true;
+            original.PartIsHidden = true;
+            _db.SaveChanges();
+        }
+
+        //[Authorize]
+       // public void RemoveIsDeleted(Parts parts);
 
         //public IList<Part> SortRequestsByOwner(string user) {
         //    return _db.Query<Part>().Where(n => n.PartOwner.UserName == user).ToList();

@@ -207,6 +207,10 @@
     <Compile Include="Migrations\201506280057211_Inital.Designer.cs">
       <DependentUpon>201506280057211_Inital.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506301716330_clientPartDelete.cs" />
+    <Compile Include="Migrations\201506301716330_clientPartDelete.Designer.cs">
+      <DependentUpon>201506301716330_clientPartDelete.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -264,7 +268,10 @@
     <Content Include="ngApp\app.js" />
     <Content Include="ngApp\controllers.js" />
     <Content Include="ngApp\services.js" />
-    <Content Include="ngPartials\addPart.html" />
+    <Content Include="ngPartials\addPartModal.html" />
+    <Content Include="ngPartials\adminPartDelete.html" />
+    <Content Include="ngPartials\adminPartsDelete.html" />
+    <Content Include="ngPartials\baseAddModal.html" />
     <Content Include="ngPartials\deletePart.html" />
     <Content Include="ngPartials\baseModal.html" />
     <Content Include="ngPartials\editPart.html" />
@@ -351,6 +358,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201506280057211_Inital.resx">
       <DependentUpon>201506280057211_Inital.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506301716330_clientPartDelete.resx">
+      <DependentUpon>201506301716330_clientPartDelete.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

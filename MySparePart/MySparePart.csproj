@@ -272,6 +272,7 @@
     <Content Include="ngPartials\adminPartDelete.html" />
     <Content Include="ngPartials\adminPartsDelete.html" />
     <Content Include="ngPartials\baseAddModal.html" />
+    <Content Include="ngPartials\baseDeleteModal.html" />
     <Content Include="ngPartials\deletePart.html" />
     <Content Include="ngPartials\baseModal.html" />
     <Content Include="ngPartials\editPart.html" />

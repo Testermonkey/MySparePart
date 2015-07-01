@@ -52,11 +52,11 @@ namespace MySparePart.API {
             if (ModelState.IsValid) {
                 if (part.Id == 0) {                 // part is new - create new fields
                     _db.Parts.Add(part);
-                    part.PartIsLocked = false;
-                    part.PartIsDeleted = false;
-                    part.PartIsHidden = false;
+                    part.PartIsLocked = true;
+                    part.PartIsDeleted = true;
+                    part.PartIsHidden = true;
                     part.ItemPostDate = DateTime.Now;
-                    part.PartOwner.UserName = HttpContext.Current.User.Identity.Name;
+                 //   part.PartOwner.UserName = HttpContext.Current.User.Identity.Name;  //fix permissions then uncomment
                     _db.SaveChanges();
                 }
                 else {                              // part not new - update fields
@@ -74,6 +74,7 @@ namespace MySparePart.API {
                     original.Quanity = part.Quanity;
                     original.ShippingSize = part.ShippingSize;
                     original.Category = part.Category;
+                    original.PartIsDeleted = part.PartIsDeleted;
                     _db.SaveChanges();
                 }
              return Request.CreateResponse(HttpStatusCode.Created, part);

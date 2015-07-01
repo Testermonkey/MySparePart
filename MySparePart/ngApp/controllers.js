@@ -83,7 +83,7 @@
             self.template = '/ngPartials/addPartModal.html'
 
             self.savePart = function () {
-                PartService.addPart(self.newPart)
+                PartService.addPart(self.part)
                 .then(function () {
                     $modalInstance.dismiss('cancel');
                 });

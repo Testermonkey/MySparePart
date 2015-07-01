@@ -23,8 +23,8 @@
         };
 
         var _clientDeletePart = function (part) {           // client delete only sets Ishidden && IsDeleted to true
-            part.IsHidden = true;
-            part.IsDeleted = true;
+            part.PartIsHidden = true;
+            part.PartIsDeleted = true;
             return part.$save();
         };
 

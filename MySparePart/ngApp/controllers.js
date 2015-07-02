@@ -3,7 +3,6 @@
     angular.module('PartApp').controller('PartListController', function ($location, PartService, $modal) {
 
         var self = this;
-
         self.parts = PartService.getParts();
 
         // key up search for the main page
@@ -49,113 +48,114 @@
                 controller: 'DeletePartsController',
                 controllerAs: 'deleteModal',
                 resolve: {
-                parts: function () {
-                    return parts;
+                    //parts: function () {
+                    //    return parts;
+                    //}
                 }
-            }
             });
         };
     });
 
     angular.module('PartApp').controller('DeletePartsController', function ($location, PartService, $modalInstance) {
-            var self = this;
-            self.template = '/ngPartials/adminPartsDelete.html'
+        var self = this;
+        self.parts = PartService.getParts();
+        self.template = '/ngPartials/adminPartsDelete.html'
 
-            self.deleteYes = function () {
-                PartService.removeIsDeleted(parts)
-                .then(function () {
-                    $modalInstance.dismiss('cancel');
-                });
-            };
+        self.deleteYes = function () {
+            PartService.removeIsDeleted(self.parts);
+            //.then(function () {
+             //   $modalInstance.dismiss('cancel');
+            //});
+        };
 
-            //currently unused
-            self.ok = function () {
-                $modalInstance.close('close');
-            };
-            //modal cancel with no action
-            self.cancel = function () {
-                $modalInstance.dismiss('cancel');
-            };
-        });
+        //currently unused
+        self.ok = function () {
+            $modalInstance.close('close');
+        };
+        //modal cancel with no action
+        self.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+    });
 
     angular.module('PartApp').controller('AddPartController', function ($location, PartService, $modalInstance) {
-            var self = this;
-            self.template = '/ngPartials/addPartModal.html'
+        var self = this;
+        self.template = '/ngPartials/addPartModal.html'
 
-            self.savePart = function () {
-                PartService.addPart(self.part)
-                .then(function () {
-                    $modalInstance.dismiss('cancel');
-                });
-            };
-
-            //currently unused
-            self.ok = function () {
-                $modalInstance.close('close');
-            };
-            //modal cancel with no action
-            self.cancel = function () {
+        self.savePart = function () {
+            PartService.addPart(self.part)
+            .then(function () {
                 $modalInstance.dismiss('cancel');
-            };
-        });
+            });
+        };
+
+        //currently unused
+        self.ok = function () {
+            $modalInstance.close('close');
+        };
+        //modal cancel with no action
+        self.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+    });
 
     angular.module('PartApp').controller('DetailViewModalController', function ($location, PartService, $modalInstance, id) {
-            var self = this;
-            self.part = PartService.getPart(id);
-            self.template = '/ngPartials/modalDetails.html'
+        var self = this;
+        self.part = PartService.getPart(id);
+        self.template = '/ngPartials/modalDetails.html'
 
-            //actions
+        //actions
 
-            //currently unused
-            self.ok = function () {
-                $modalInstance.close('close');
-            };
-            //modal cancel with no action
-            self.cancel = function () {
+        //currently unused
+        self.ok = function () {
+            $modalInstance.close('close');
+        };
+        //modal cancel with no action
+        self.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+
+        //edit Part
+        self.save = function () {
+            PartService.editPart(self.part)
+            .then(function () {
                 $modalInstance.dismiss('cancel');
-            };
+            });
+        };
 
-            //edit Part
-            self.save = function () {
-                PartService.editPart(self.part)
-                .then(function () {
-                    $modalInstance.dismiss('cancel');
-                });
-            };
+        //client delete action - Sets IsDeleted && IsHidden to true
+        self.deleteYes = function () {
+            PartService.clientDeletePart(self.part)
+            .then(function () {
+                $modalInstance.dismiss('cancel');
+            });
+        };
 
-            //client delete action - Sets IsDeleted && IsHidden to true
-            self.deleteYes = function () {
-                PartService.clientDeletePart(self.part)
-                .then(function () {
-                    $modalInstance.dismiss('cancel');
-                });
-            };
+        self.adminPartDeleteYes = function () {
+            PartService.deletePart(self.part.id)
+            .then(function () {
+                $modalInstance.dismiss('cancel');
+            });
+        };
 
-            self.adminPartDeleteYes = function () {
-                PartService.deletePart(self.part.id)
-                .then(function () {
-                    $modalInstance.dismiss('cancel');
-                });
-            };
+        //links to partaials
+        self.edit = function () {
+            self.template = '/ngPartials/editPart.html';
+        };
+        self.details = function () {
+            self.template = '/ngPartials/modalDetails.html'
+        };
+        self.deletePart = function () {
+            self.template = '/ngPartials/deletePart.html'
+        };
+        self.request = function () {
+            self.template = '/ngpartials/requestPart.html'
+        };
+        self.adminPartDelete = function () {
+            self.template = "/ngPartials/adminPartDelete.html";
+        };
 
-            //links to partaials
-            self.edit = function () {
-                self.template = '/ngPartials/editPart.html';
-            };
-            self.details = function () {
-                self.template = '/ngPartials/modalDetails.html'
-            };
-            self.deletePart = function () {
-                self.template = '/ngPartials/deletePart.html'
-            };
-            self.request = function () {
-                self.template = '/ngpartials/requestPart.html'
-            };
-            self.adminPartDelete = function () {
-                self.template = "/ngPartials/adminPartDelete.html";
-            };
+    });
 
-        });
 
- 
 })();

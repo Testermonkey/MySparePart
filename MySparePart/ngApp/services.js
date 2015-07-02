@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    angular.module('PartApp').factory('PartService', function ($resource, PART_API) {
+    angular.module('PartApp').factory('PartService', function ($resource, PART_API, $http) {
 
         var Part = $resource(PART_API);
 
@@ -32,9 +32,15 @@
             return Part.remove({ id: id }).$promise;
         };
 
-        var _removeIsDeleted = function (parts) {   // drop all IsDeleted == true  **admin utility**
-            return parts.$save;
-            }
+        var _removeIsDeleted = function () {   // drop all IsDeleted == true  **admin utility**
+            $http.get("/api/parts/removeIsDeleted")
+                .success(function (data) { alert(data)})
+                .error(function(){alert("fail")});
+
+
+           // alert("fail");
+          // return parts.$save;
+        };
      
 
         return {
@@ -45,7 +51,7 @@
             editPart: _editPart,
             removeIsDeleted: _removeIsDeleted,      // drop all IsDeleted == true  **admin utility**
             deletePart: _deletePart,                // drop one part from DB  **admin utility**
-            clientDeletePart: _clientDeletePart,    // set IsHidden and Isdeleted == true
+            clientDeletePart: _clientDeletePart    // set IsHidden and Isdeleted == true
 
             
         };

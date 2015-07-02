@@ -1,27 +1,29 @@
-﻿<h3 class="modal-title">Details Modal</h3>
+﻿<div class="container">
+    <h3 class="modal-title">Details Modal</h3>
 
-{{modal.part.name}}
-<br />
-{{modal.part.partNumber}}
-<br />
-{{modal.part.description}}
-<br />
+    {{modal.part.name}}
+    <br />
+    {{modal.part.partNumber}}
+    <br />
+    {{modal.part.description}}
+    <br />
 
 
 
 
-<!-- if PartOwner show this -->
-<a ng-click="modal.edit()"> edit </a>
-<br />
+    <!-- if PartOwner show this -->
+    <a ng-click="modal.edit()"> edit </a>
+    <br />
 
-<!-- if !PartOwner && IsAuthenticated show this -->
-<a ng-click="modal.request()">request </a><br />
-<br />
+    <!-- if !PartOwner && IsAuthenticated show this -->
+    <a ng-click="modal.request()">request </a><br />
+    <br />
 
-<!-- if PartOwner && IsAuthenticated show this -->
-<a ng-click="modal.deletePart()"> client delete(mark as hidden) </a>
-<br />
+    <!-- if PartOwner && IsAuthenticated show this -->
+    <a ng-click="modal.deletePart()"> client delete(mark as hidden) </a>
+    <br />
 
-<!--only admins get to see this-->
-<a ng-click="modal.adminPartDelete()">adminPartDelete</a>
-<br />
+    <!--only admins get to see this-->
+    <a ng-click="modal.adminPartDelete()">adminPartDelete</a>
+    <br />
+</div>

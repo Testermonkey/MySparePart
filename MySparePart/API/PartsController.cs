@@ -15,12 +15,12 @@ namespace MySparePart.API {
         private ApplicationDbContext _db = new ApplicationDbContext();
 
 
-      
+
         //    //// need to logout/login again to load claims
         //    //var claimsUser = this.User as ClaimsPrincipal;
         //    //var claims = claimsUser.Claims.ToList();
 
-      
+
 
         public IList<Part> GetParts() {
             var currentUser = new ApplicationUser();
@@ -56,7 +56,7 @@ namespace MySparePart.API {
                     part.PartIsDeleted = true;
                     part.PartIsHidden = true;
                     part.ItemPostDate = DateTime.Now;
-                 //   part.PartOwner.UserName = HttpContext.Current.User.Identity.Name;  //fix permissions then uncomment
+                    //   part.PartOwner.UserName = HttpContext.Current.User.Identity.Name;  //fix permissions then uncomment
                     _db.SaveChanges();
                 }
                 else {                              // part not new - update fields
@@ -77,21 +77,32 @@ namespace MySparePart.API {
                     original.PartIsDeleted = part.PartIsDeleted;
                     _db.SaveChanges();
                 }
-             return Request.CreateResponse(HttpStatusCode.Created, part);
+                return Request.CreateResponse(HttpStatusCode.Created, part);
             }
-           return Request.CreateErrorResponse(HttpStatusCode.BadRequest, this.ModelState);
+            return Request.CreateErrorResponse(HttpStatusCode.BadRequest, this.ModelState);
         }
 
         public Part GetPart(int id) {
             return _db.Parts.Find(id);
         }
-
+        //recomended
         // [Authorize]
         public void DeletePart(int id) {
             var original = _db.Parts.Find(id);
             _db.Parts.Remove(original);
             _db.SaveChanges();
         }
+
+        //use with caution 
+        // [Authorize]
+        [Route("removeIsDeleted")]
+        public void removeIsDeleted() {
+            var DelList = _db.Parts.Where(n => n.PartIsDeleted == true).ToList();
+            foreach(Part part in DelList){
+                _db.Parts.Remove(part);
+            }            
+            _db.SaveChanges();
+       }
 
         public void clientDeletePart(int id) {
             var original = _db.Parts.Find(id);
@@ -101,7 +112,7 @@ namespace MySparePart.API {
         }
 
         //[Authorize]
-       // public void RemoveIsDeleted(Parts parts);
+        // public void RemoveIsDeleted(Parts parts);
 
         //public IList<Part> SortRequestsByOwner(string user) {
         //    return _db.Query<Part>().Where(n => n.PartOwner.UserName == user).ToList();

@@ -1,10 +1,9 @@
-﻿<div class="container">
-    <table ng-cloak="true" class="table table-responsive">
+﻿<table ng-cloak="true" class="table table-responsive">
         <thead>
             <tr>
-                <th>
+                <!--<th>
                     Image
-                </th>
+                </th>-->
 
                 <th>
                     Name
@@ -21,17 +20,12 @@
         </thead>
         <tbody>
             <tr ng-repeat="part in deleteModal.parts | filter:{partIsDeleted:true}">
-                <td><img ng-src="{{part.image}}"></td>
+                <!--<td><img ng-src="{{part.image}}"></td>-->
                 <td>{{part.name}}</td>
                 <td>{{part.partNumber}}</td>
                 <td>{{part.description}}</td>
-                <td>{{part.partIsDeleted}}</td>
-            </tr>
-            <tr>
-                <td><h2>Remove these parts from the database?</h2></td>
-                <a ng-click="deleteModal.deleteYes()"> Delete? </a>
+                <!--<td>{{part.partIsDeleted}}</td>-->
             </tr>
         </tbody>
     </table>
-
-</div>
+<a ng-click="deleteModal.deleteYes()"> Delete? </a>

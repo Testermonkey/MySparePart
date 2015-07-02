@@ -1,11 +1,11 @@
-﻿<div class="container">
-
+﻿
+<div id="inner">
     <table ng-cloak="true" class="table table-responsive">
         <thead>
             <tr>
-                <th>
+                <!--<th>
                     Image
-                </th>
+                </th>-->
 
                 <th>
                     Category
@@ -18,23 +18,21 @@
                 <th>
                     Description
                 </th>
-                <th>
+                <!--<th>
                     partIsDeleted
-                </th>
+                </th>-->
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="part in main.parts" ng-click="main.showDetails(part.id)">
-                <td><img ng-src="{{part.image}}"></td>
+                <!--<td><img ng-src="{{part.image}}"></td>-->
                 <td>{{part.name}}</td>
                 <td>{{part.partNumber}}</td>
                 <td>{{part.description}}</td>
-                <td>{{part.partIsDeleted}}</td>
-            </tr>
-
-
+                
+                <!--<td>{{part.partIsDeleted}}</td>-->
+             </tr>
         </tbody>
     </table>
-
-
 </div>
+

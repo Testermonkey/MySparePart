@@ -5,6 +5,12 @@
         var self = this;
         self.parts = PartService.getParts();
 
+        self.sort = 'name';
+        self.sortReverse = 'false';
+        self.searchPartNumber = '';
+        self.searchDescription = '';
+
+
         // key up search for the main page
         self.filterParts = function (parts) {
             if (!self.search) {

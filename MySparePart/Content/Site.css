@@ -15,3 +15,16 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#navSignIn {
+    padding-right: 10em;
+}
+
+#view {
+    vertical-align:bottom;
+}
+
+#inner {
+    display:table;
+    margin: 0 auto;
+}

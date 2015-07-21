@@ -7,10 +7,9 @@ using System.Web;
 namespace MySparePart.Models {
     public class Part {
         public int Id { get; set; }
-
         public ApplicationUser PartOwner { get; set; }
-
-      public DateTime ItemPostDate { get; set; }
+        public DateTime ItemPostDate { get; set; }
+        public string ImagePath { get; set; }
 
         [Required(ErrorMessage = "Part name required")]
         [StringLength(50, ErrorMessage = "Less then 50 characters")]
@@ -21,7 +20,7 @@ namespace MySparePart.Models {
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Quanity required")]
-        [Range(0, 10)]
+        //[Range(0, 10)]
         public int Quanity { get; set; }
 
         public string PartNumber { get; set; }

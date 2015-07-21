@@ -3,30 +3,31 @@ namespace MySparePart.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Inital : DbMigration
+    public partial class inital : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.Parts",
+                "dbo.PartRequests",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        ItemPostDate = c.DateTime(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 50),
-                        Description = c.String(nullable: false, maxLength: 500),
-                        Quanity = c.Int(nullable: false),
-                        PartNumber = c.String(),
-                        ShippingSize = c.String(),
-                        PartIsHidden = c.Boolean(nullable: false),
-                        PartIsLocked = c.Boolean(nullable: false),
-                        PartIsDeleted = c.Boolean(nullable: false),
-                        Catagory = c.String(),
+                        RequestTimeStamp = c.DateTime(nullable: false),
+                        RequestMailedTimeStamp = c.DateTime(nullable: false),
+                        RequestEmailSent = c.Boolean(nullable: false),
+                        RequestMailed = c.Boolean(nullable: false),
+                        ItemId = c.Int(nullable: false),
                         PartOwner_Id = c.String(maxLength: 128),
+                        RequestUser_Id = c.String(maxLength: 128),
+                        Part_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.PartOwner_Id)
-                .Index(t => t.PartOwner_Id);
+                .ForeignKey("dbo.AspNetUsers", t => t.RequestUser_Id)
+                .ForeignKey("dbo.Parts", t => t.Part_Id)
+                .Index(t => t.PartOwner_Id)
+                .Index(t => t.RequestUser_Id)
+                .Index(t => t.Part_Id);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -87,26 +88,26 @@ namespace MySparePart.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
-                "dbo.PartRequests",
+                "dbo.Parts",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        RequestTimeStamp = c.DateTime(nullable: false),
-                        RequestMailedTimeStamp = c.DateTime(nullable: false),
-                        RequestEmailSent = c.Boolean(nullable: false),
-                        RequestMailed = c.Boolean(nullable: false),
-                        ItemId = c.Int(nullable: false),
+                        ItemPostDate = c.DateTime(nullable: false),
+                        ImagePath = c.String(),
+                        Name = c.String(nullable: false, maxLength: 50),
+                        Description = c.String(nullable: false, maxLength: 500),
+                        Quanity = c.Int(nullable: false),
+                        PartNumber = c.String(),
+                        ShippingSize = c.String(),
+                        PartIsHidden = c.Boolean(nullable: false),
+                        PartIsLocked = c.Boolean(nullable: false),
+                        PartIsDeleted = c.Boolean(nullable: false),
+                        Category = c.String(),
                         PartOwner_Id = c.String(maxLength: 128),
-                        RequestUser_Id = c.String(maxLength: 128),
-                        Part_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.PartOwner_Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.RequestUser_Id)
-                .ForeignKey("dbo.Parts", t => t.Part_Id)
-                .Index(t => t.PartOwner_Id)
-                .Index(t => t.RequestUser_Id)
-                .Index(t => t.Part_Id);
+                .Index(t => t.PartOwner_Id);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -124,29 +125,29 @@ namespace MySparePart.Migrations
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.PartRequests", "Part_Id", "dbo.Parts");
+            DropForeignKey("dbo.Parts", "PartOwner_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.PartRequests", "RequestUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.PartRequests", "PartOwner_Id", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Parts", "PartOwner_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.PartRequests", new[] { "Part_Id" });
-            DropIndex("dbo.PartRequests", new[] { "RequestUser_Id" });
-            DropIndex("dbo.PartRequests", new[] { "PartOwner_Id" });
+            DropIndex("dbo.Parts", new[] { "PartOwner_Id" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.Parts", new[] { "PartOwner_Id" });
+            DropIndex("dbo.PartRequests", new[] { "Part_Id" });
+            DropIndex("dbo.PartRequests", new[] { "RequestUser_Id" });
+            DropIndex("dbo.PartRequests", new[] { "PartOwner_Id" });
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.PartRequests");
+            DropTable("dbo.Parts");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.Parts");
+            DropTable("dbo.PartRequests");
         }
     }
 }

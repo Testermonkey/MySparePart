@@ -7,13 +7,13 @@ namespace MySparePart.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.1-30610")]
-    public sealed partial class clientPartDelete : IMigrationMetadata
+    public sealed partial class inital : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(clientPartDelete));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(inital));
         
         string IMigrationMetadata.Id
         {
-            get { return "201506301716330_clientPartDelete"; }
+            get { return "201507210431485_inital"; }
         }
         
         string IMigrationMetadata.Source

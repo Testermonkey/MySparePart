@@ -204,13 +204,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201506280057211_Inital.cs" />
-    <Compile Include="Migrations\201506280057211_Inital.Designer.cs">
-      <DependentUpon>201506280057211_Inital.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506301716330_clientPartDelete.cs" />
-    <Compile Include="Migrations\201506301716330_clientPartDelete.Designer.cs">
-      <DependentUpon>201506301716330_clientPartDelete.cs</DependentUpon>
+    <Compile Include="Migrations\201507210431485_inital.cs" />
+    <Compile Include="Migrations\201507210431485_inital.Designer.cs">
+      <DependentUpon>201507210431485_inital.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -261,11 +257,13 @@
     <Content Include="bin\System.Web.WebPages.Razor.dll" />
     <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\15349_miscellaneous_electronic_circuit.jpg" />
+    <Content Include="Content\718dx+WkkvL.jpg" />
     <Content Include="Content\821-electronic-components-1920x1200-photography-wallpaper.jpg" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\electronic-green-background-wallpaper_2062347838.jpg" />
+    <Content Include="Content\ihover.min.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\Supernice.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
@@ -365,11 +363,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201506280057211_Inital.resx">
-      <DependentUpon>201506280057211_Inital.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506301716330_clientPartDelete.resx">
-      <DependentUpon>201506301716330_clientPartDelete.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201507210431485_inital.resx">
+      <DependentUpon>201507210431485_inital.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

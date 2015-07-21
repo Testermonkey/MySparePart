@@ -1,77 +1,22 @@
 ﻿
-<div id="inner">
-    <table ng-cloak="true" class="table table-responsive">
-        <thead>
-            <tr>
-                <!--<th>
-                    Image
-                </th>-->
 
-                <th>
-                    Category
-                </th>
 
-                <th>
-                    Part Number
-                </th>
 
-                <th>
-                    Description
-                </th>
-                <th>
-                    partIsDeleted
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="part in main.parts" ng-click="main.showDetails(part.id)">
-                <!--<td><img ng-src="{{part.image}}"></td>-->
-                <td>{{part.name}}</td>
-                <td>{{part.partNumber}}</td>
-                <td>{{part.description}}</td>
-
-                <td>{{part.partIsDeleted}}</td>
-            </tr>
-        </tbody>
-    <tfoot>
-        <td colspan="3">
-            <div class="pagination">
-                <ul>
-                    <li ng-class="prevPageDisabled()">
-                        <a href  ng-click="prevPage()"> << Prev</a>
-                    </li>
-                    <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)">
-                        <a href="#">{{n+1}}</a>
-                    </li>
-                    <li ng-class="nextPageDisabled()">
-                        <a href ng-click="nextPage()">Next >></a>
-                    </li>
-                </ul>
-            </div>
-        </td>
-    </tfoot>
-    </table><!--<ul class="pagination">
-        <li>
-            <a href="#">Prev</a>
-        </li>
-        <li>
-            <a href="#">1</a>
-        </li>
-        <li>
-            <a href="#">2</a>
-        </li>
-        <li>
-            <a href="#">3</a>
-        </li>
-        <li>
-            <a href="#">4</a>
-        </li>
-        <li>
-            <a href="#">5</a>
-        </li>
-        <li>
-            <a href="#">Next</a>
-        </li>
-    </ul>-->
+<!-- normal -->
+<div>
+    <div class="col-sm-3" ng-repeat="part in main.parts">
+        <div class="ih-item square effect8 scale_up" ng-click="main.showDetails(part.id)">
+            <a href="#">
+                <div class="img"><img src={{part.imagePath}} alt="img"></div>
+                <div class="info">
+                    <h3>{{part.name}}</h3>
+                    <p>{{part.description}}</p>
+                </div>
+            </a>
+        </div>
+    </div>
 </div>
+
+
+
 

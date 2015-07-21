@@ -1,14 +1,33 @@
 ﻿body {
     padding-top: 0px;
     padding-bottom: 20px;
-    background-image: url('electronic-green-background-wallpaper_2062347838.jpg');
+    background-image: url('15349_miscellaneous_electronic_circuit.jpg');
+    background-color: #cccccc;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: whitesmoke;
 }
+
+img {
+    opacity: 0.8;
+    filter: alpha(opacity=40);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: middle;
+    height: 160px;
+    max-width: 200px;
+    
+}
+
+
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
+
+
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
@@ -22,10 +41,10 @@ textarea {
 }
 
 #view {
-    vertical-align:bottom;
+    vertical-align: bottom;
 }
 
 #inner {
-    display:table;
+    display: table;
     margin: 0px auto;
 }

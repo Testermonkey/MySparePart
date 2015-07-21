@@ -58,11 +58,26 @@ namespace MySparePart.Migrations {
                         new Part {Name="Infrared Encoder", ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category="Capacitor" },
                         new Part {Name="EMI Filter", ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category="Resistor" },
                         new Part {Name="Air Flow Sensor", ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category="Capacitor" },
+                        new Part {Name="Vacuum Sensor",  ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category="Capacitor" },
+                         new Part {Name="THERMAL FUSE",  ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category= "Capacitor" },
+                        new Part {Name="Infrared Encoder", ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category="Capacitor" },
+                        new Part {Name="EMI Filter", ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category="Resistor" },
+                        new Part {Name="Air Flow Sensor", ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category="Capacitor" },
+                        new Part {Name="Vacuum Sensor",  ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category="Capacitor" },
+                             new Part {Name="THERMAL FUSE",  ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category= "Capacitor" },
+                        new Part {Name="Infrared Encoder", ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category="Capacitor" },
+                        new Part {Name="EMI Filter", ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category="Resistor" },
+                        new Part {Name="Air Flow Sensor", ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category="Capacitor" },
+                        new Part {Name="Vacuum Sensor",  ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category="Capacitor" },
+                             new Part {Name="THERMAL FUSE",  ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category= "Capacitor" },
+                        new Part {Name="Infrared Encoder", ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category="Capacitor" },
+                        new Part {Name="EMI Filter", ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category="Resistor" },
+                        new Part {Name="Air Flow Sensor", ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category="Capacitor" },
                         new Part {Name="Vacuum Sensor",  ItemPostDate=DateTime.Now, Description="New Axial .01uf 5VDC 10% 20" , ShippingSize="Small", Quanity=10, PartNumber="N/A", Category="Capacitor" }
                     };
 
-            context.Parts.AddOrUpdate(p => p.Name, Parts);
-
+          context.Parts.AddOrUpdate(p => p.Name, Parts);
+           
 
             //userManager.Create(user, "123123");
             //userManager.AddToRole(user.Id, "");

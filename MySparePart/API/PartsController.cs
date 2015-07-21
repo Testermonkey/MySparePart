@@ -95,14 +95,14 @@ namespace MySparePart.API {
 
         //use with caution 
         // [Authorize]
-        [Route("removeIsDeleted")]
-        public void removeIsDeleted() {
+        //[Route("removeIsDeleted")]
+        public void DeleteAll() {
             var DelList = _db.Parts.Where(n => n.PartIsDeleted == true).ToList();
-            foreach(Part part in DelList){
+            foreach (Part part in DelList) {
                 _db.Parts.Remove(part);
-            }            
+            }
             _db.SaveChanges();
-       }
+        }
 
         public void clientDeletePart(int id) {
             var original = _db.Parts.Find(id);

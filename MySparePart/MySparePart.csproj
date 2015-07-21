@@ -162,6 +162,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\PartRequestsController.cs" />
     <Compile Include="API\PartsController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -259,9 +260,12 @@
     <Content Include="bin\System.Web.WebPages.dll" />
     <Content Include="bin\System.Web.WebPages.Razor.dll" />
     <Content Include="bin\WebGrease.dll" />
+    <Content Include="Content\15349_miscellaneous_electronic_circuit.jpg" />
+    <Content Include="Content\821-electronic-components-1920x1200-photography-wallpaper.jpg" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\electronic-green-background-wallpaper_2062347838.jpg" />
     <Content Include="Content\style.css" />
     <Content Include="Content\Supernice.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
@@ -282,7 +286,7 @@
     <Content Include="ngPartials\listParts.html" />
     <Content Include="ngPartials\modalDetails.html" />
     <Content Include="ngPartials\navBar.html" />
-    <Content Include="ngPartials\requestPart.html" />
+    <Content Include="ngPartials\partRequest.html" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-resource.js" />
     <Content Include="Scripts\angular-resource.min.js" />

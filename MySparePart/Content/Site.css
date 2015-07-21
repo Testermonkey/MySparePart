@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 0px;
     padding-bottom: 20px;
+    background-image: url('electronic-green-background-wallpaper_2062347838.jpg');
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -26,5 +27,5 @@ textarea {
 
 #inner {
     display:table;
-    margin: 0 auto;
+    margin: 0px auto;
 }

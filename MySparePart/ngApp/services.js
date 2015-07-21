@@ -1,24 +1,54 @@
 ﻿(function () {
 
-    angular.module('PartApp').factory('PartService', function ($resource, PART_API, $http) {
+    angular.module('PartApp').factory('PartRequestService', function ($resource, PART_API, PARTREQUEST_API) {
+        var PartRequest = $resource(PARTREQUEST_API)
 
+        var _addPartRequest = function () {             // Create new PartRequest
+            var newPartRequest = new PartRequest(partRequest);
+            return newPartRequest.$save();
+        };
+        var _getPartRequests = function () {            //get all PartRequests
+            return PartRequest.query();
+        };
+
+        var _getPartRequest = function (id) {           //get a single PartRequest by id
+            return partRequest.get({ id: id })
+        };
+
+        var _editPartRequest = function (partRequest) {  // Edit sleected partRequest
+            return partRequest.$save();
+        };
+
+        var _deletePartRequest = function (id) {           // drop one partRequest by id from DB  **admin utility**
+            return PartRequest.remove({ id: id }).$promise;
+        };
+
+        return {
+            addPartRequest: _addPartRequest,
+            getPartRequests: _getPartRequests,
+            getPartRequest: _getPartRequest,
+            editPartRequest: _editPartRequest,
+            deletePartRequest: _deletePartRequest, // drop one part from DB  **admin utility**
+        };
+    });
+
+    angular.module('PartApp').factory('PartService', function ($resource, PART_API) {
         var Part = $resource(PART_API);
 
-        
-        var _getParts = function () {               // Get all Parts
-            return Part.query();
-        };
-
-        var _getPart = function (id) {              // Get single part from id
-            return Part.get({ id: id })
-        };
-
-        var _addPart = function (part) {            // Create new Part
+        var _addPart = function (part) {                // Create new Part
             var newPart = new Part(part);
             return newPart.$save();
         };
 
-        var _editPart = function (part) {           // Edit sleected part
+        var _getParts = function () {                   // Get all Parts
+            return Part.query();
+        };
+
+        var _getPart = function (id) {                  // Get single part from id
+            return Part.get({ id: id })
+        };
+
+        var _editPart = function (part) {               // Edit sleected part
             return part.$save();
         };
 
@@ -33,27 +63,24 @@
         };
 
         var _removeIsDeleted = function () {   // drop all IsDeleted == true  **admin utility**
-            $http.get("/api/parts/removeIsDeleted")
-                .success(function (data) { alert(data)})
-                .error(function(){alert("fail")});
+            //$http.get("/api/parts/removeIsDeleted")
+            //    .success(function (data) { alert(data)})
+            //    .error(function(){alert("fail")});
 
-
-           // alert("fail");
-          // return parts.$save;
+            return Part.remove().$promise;
+            // alert("fail");
+            // return parts.$save;
         };
-     
 
         return {
             addPart: _addPart,
+            addPart: _addPart,
             getParts: _getParts,
             getPart: _getPart,
-            addPart: _addPart,
             editPart: _editPart,
             removeIsDeleted: _removeIsDeleted,      // drop all IsDeleted == true  **admin utility**
             deletePart: _deletePart,                // drop one part from DB  **admin utility**
             clientDeletePart: _clientDeletePart    // set IsHidden and Isdeleted == true
-
-            
         };
     });
 

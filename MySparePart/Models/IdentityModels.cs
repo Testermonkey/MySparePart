@@ -21,8 +21,9 @@ namespace MySparePart.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-
+        // new db sets for MySparePart
         public IDbSet<Part> Parts { get; set; }
+        public IDbSet<PartRequest> PartRequests { get; set; }
 
 
         public ApplicationDbContext()

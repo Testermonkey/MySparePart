@@ -5,13 +5,9 @@
         var self = this;
         self.parts = PartService.getParts();
 
-        self.sort = 'name';
-        self.sortReverse = 'false';
-        self.searchPartNumber = '';
-        self.searchDescription = '';
+        
 
-
-        // key up search for the main page
+           // key up search for the main page
         self.filterParts = function (parts) {
             if (!self.search) {
                 return true;
@@ -68,10 +64,10 @@
         self.template = '/ngPartials/adminPartsDelete.html'
 
         self.deleteYes = function () {
-            PartService.removeIsDeleted(self.parts);
-            //.then(function () {
-             //   $modalInstance.dismiss('cancel');
-            //});
+            PartService.removeIsDeleted()
+            .then(function () {
+              $modalInstance.dismiss('cancel');
+            });
         };
 
         //currently unused
@@ -105,7 +101,7 @@
         };
     });
 
-    angular.module('PartApp').controller('DetailViewModalController', function ($location, PartService, $modalInstance, id) {
+    angular.module('PartApp').controller('DetailViewModalController', function ($location, PartService, $modal,$modalInstance, id) {
         var self = this;
         self.part = PartService.getPart(id);
         self.template = '/ngPartials/modalDetails.html'
@@ -154,8 +150,24 @@
         self.deletePart = function () {
             self.template = '/ngPartials/deletePart.html'
         };
-        self.request = function () {
-            self.template = '/ngpartials/requestPart.html'
+        //self.request = function () {
+        //    self.template = '/ngpartials/requestPart.html'
+        //};
+
+        //start the request modal with new PartRequestsController
+        self.request = function (id) {
+            $modal.open({
+                animation: true,
+                templateUrl: '/ngPartials/baseModal.html',
+                controller: 'AddPartRequestController',
+                controllerAs: 'modal',
+                //size: size,
+                resolve: {
+                    id: function () {
+                        return id;
+                    }
+                }
+            });
         };
         self.adminPartDelete = function () {
             self.template = "/ngPartials/adminPartDelete.html";
@@ -163,5 +175,25 @@
 
     });
 
+    angular.module('PartApp').controller('AddPartRequestController', function (PartService, PartRequestService, $modalInstance, id) {
+        var self = this;
+        self.part = PartService.getPart(id);
+        self.template = '/ngPartials/partRequest.html'
 
+        self.savePartRequest = function () {
+            PartRequestService.addPartRequest(self.part)
+            .then(function () {
+                $modalInstance.dismiss('cancel');
+            });
+        };
+
+        //currently unused
+        self.ok = function () {
+            $modalInstance.close('close');
+        };
+        //modal cancel with no action
+        self.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+    });
 })();

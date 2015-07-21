@@ -1,7 +1,10 @@
-﻿<html xmlns="http://www.w3.org/1999/xhtml" ng-app="PartApp">
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="PartApp">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
-    @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/sandstone/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link href="~/Content/Site.css" rel="stylesheet" />
@@ -9,19 +12,22 @@
 </head>
 <body ng-controller="PartListController as main">
     <div ng-include src="'/ngPartials/navBar.html'"></div>
+    <div class="row">
+        <div class="col-md-3">
+            <img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/">
+        </div>
+        <div class="col-md-9" >
+            
 
-    <ng-view align="center">
 
-    </ng-view>
-
-
-    @*<div class="row">
-        <div class="col-md-12">
-            <ng-view>
+            <ng-view align="right">
 
             </ng-view>
+
+
+
         </div>
-    </div>*@
+    </div>
 
     <script src="~/Scripts/angular.min.js"></script>
     <script src="~/Scripts/angular-resource.min.js"></script>

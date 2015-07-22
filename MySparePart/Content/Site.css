@@ -8,17 +8,20 @@
 }
 
 img {
-    opacity: 0.8;
+    opacity: 0.7;
     filter: alpha(opacity=40);
     display: block;
     margin-left: auto;
     margin-right: auto;
-    vertical-align: middle;
-    height: 160px;
-    max-width: 200px;
+    vertical-align: central;
+    height: 50em;
+    width: 50em;
     
 }
 
+.modal-content{
+    background-image: url('15349_miscellaneous_electronic_circuit.jpg');
+}
 
 
 /* Set padding to keep content from hitting the edges */

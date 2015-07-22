@@ -1,0 +1,9 @@
+﻿<div class="container">
+    {{modal.part.name}}
+    <h3>Part tRequest</h3>
+    <p>An email will be send to the part owner </p> {{modal.part.partOwner.name}}
+    <p>And to you the part requestor </p> {{modal.part.partRequestor.name}}
+
+    <a ng-click="modal.savePartRequest()"> request? </a>
+    
+</div>

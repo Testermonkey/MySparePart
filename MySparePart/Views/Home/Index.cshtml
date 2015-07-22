@@ -7,31 +7,24 @@
     <title></title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/sandstone/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-  <link href="~/Content/Supernice.css" rel="stylesheet" />
-    <link href="~/Content/ihover.min.css" rel="stylesheet" />
+    <link href="~/Content/Supernice.css" rel="stylesheet" />
+    <link href="~/Content/ihover.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
     <base href="/" />
 </head>
 <body ng-controller="PartListController as main">
-    <div ng-include src="'/ngPartials/navBar.html'"></div>
- 
-            
-
-
-            <ng-view align="right">
-
-            </ng-view>
-
-
-
-       
+    <div ng-include src="'/ngPartials/navBar.html'">
+    </div>
+         
+    <div>
+        <ng-view align="right">
+        </ng-view>
     </div>
 
     <script src="~/Scripts/angular.min.js"></script>
     <script src="~/Scripts/angular-resource.min.js"></script>
     <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
     <script src="~/Scripts/angular-route.min.js"></script>
-    @*https://cdnjs.cloudflare.com/ajax/libs/angular-smart-table/2.1.0/smart-table.min.js*@
     <script src="~/ngApp/app.js"></script>
     <script src="~/ngApp/Controllers.js"></script>
     <script src="~/ngApp/Services.js"></script>

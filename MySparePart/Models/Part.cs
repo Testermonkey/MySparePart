@@ -7,7 +7,7 @@ using System.Web;
 namespace MySparePart.Models {
     public class Part {
         public int Id { get; set; }
-        public ApplicationUser PartOwner { get; set; }
+        public string OwnerEmail { get; set; }
         public DateTime ItemPostDate { get; set; }
         public string ImagePath { get; set; }
 
@@ -20,7 +20,6 @@ namespace MySparePart.Models {
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Quanity required")]
-        //[Range(0, 10)]
         public int Quanity { get; set; }
 
         public string PartNumber { get; set; }
@@ -34,14 +33,6 @@ namespace MySparePart.Models {
         public bool PartIsDeleted { get; set; }
 
         public string Category { get; set; }
-
-        //public enum Category {
-        //    Capacitor, Electrical_connector‎,
-        //    Photodetector‎, Transducer‎,
-        //    Resistors, Switches, Crystal,
-        //    Diode, LED, Transistor, MOV,
-        //    Voltage_Regulator, Mechanical
-        //} 
 
         public ICollection<PartRequest> PartRequest { get; set; } // For request tracking
         public Part() {

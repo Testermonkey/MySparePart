@@ -3,16 +3,20 @@
 
 
 <!-- normal -->
-<div>
-    <div class="col-sm-3" ng-repeat="part in main.parts">
-        <div class="ih-item square effect8 scale_up" ng-click="main.showDetails(part.id)">
-            <a href="#">
-                <div class="img"><img src={{part.imagePath}} alt="img"></div>
-                <div class="info">
-                    <h3>{{part.name}}</h3>
-                    <p>{{part.description}}</p>
-                </div>
-            </a>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3" ng-repeat="part in main.parts">
+            <div class="ih-item square effect8 scale_up" ng-click="main.showDetails(part.id)">
+                <a href="#">
+                    <div class="img"><img src={{part.imagePath}} alt="img"></div>
+                    <div class="info">
+                        <h3>{{part.name}}</h3>
+                        <p>{{part.description}}</p>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 </div>

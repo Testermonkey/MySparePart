@@ -5,9 +5,7 @@
         var self = this;
         self.parts = PartService.getParts();
 
-        
-
-           // key up search for the main page
+           // key up search for the main page - not implimented
         self.filterParts = function (parts) {
             if (!self.search) {
                 return true;
@@ -74,6 +72,7 @@
         self.ok = function () {
             $modalInstance.close('close');
         };
+
         //modal cancel with no action
         self.cancel = function () {
             $modalInstance.dismiss('cancel');
@@ -101,7 +100,7 @@
         };
     });
 
-    angular.module('PartApp').controller('DetailViewModalController', function ($location, PartService, $modal,$modalInstance, id) {
+    angular.module('PartApp').controller('DetailViewModalController', function ($location, PartService, PartRequestService, $modal,$modalInstance, id) {
         var self = this;
         self.part = PartService.getPart(id);
         self.template = '/ngPartials/modalDetails.html'
@@ -140,60 +139,56 @@
             });
         };
 
-        //links to partaials
+        self.savePartRequest = function () {
+            var model = {};
+            model.itemId = self.part.id;
+            model.ownerEmail = self.part.ownerEmail;
+
+                PartRequestService.addPartRequest(model)
+
+                .then(function () {
+                    $modalInstance.dismiss('cancel');
+                });
+            };
+
+        //links to templates
         self.edit = function () {
             self.template = '/ngPartials/editPart.html';
         };
         self.details = function () {
-            self.template = '/ngPartials/modalDetails.html'
+            self.template = '/ngPartials/modalDetails.html';
         };
         self.deletePart = function () {
-            self.template = '/ngPartials/deletePart.html'
+            self.template = '/ngPartials/deletePart.html';
         };
-        //self.request = function () {
-        //    self.template = '/ngpartials/requestPart.html'
-        //};
-
-        //start the request modal with new PartRequestsController
-        self.request = function (id) {
-            $modal.open({
-                animation: true,
-                templateUrl: '/ngPartials/baseModal.html',
-                controller: 'AddPartRequestController',
-                controllerAs: 'modal',
-                //size: size,
-                resolve: {
-                    id: function () {
-                        return id;
-                    }
-                }
-            });
+        self.request = function () {
+            self.template = '/ngPartials/requestPart.html';
         };
+        
         self.adminPartDelete = function () {
             self.template = "/ngPartials/adminPartDelete.html";
         };
-
     });
 
-    angular.module('PartApp').controller('AddPartRequestController', function (PartService, PartRequestService, $modalInstance, id) {
-        var self = this;
-        self.part = PartService.getPart(id);
-        self.template = '/ngPartials/partRequest.html'
+    //angular.module('PartApp').controller('AddPartRequestController', function (PartService, PartRequestService, $modalInstance, id) {
+    //    var self = this;
+    //    self.part = PartService.getPart(id);
+    //    self.template = '/ngPartials/partRequest.html'
 
-        self.savePartRequest = function () {
-            PartRequestService.addPartRequest(self.part)
-            .then(function () {
-                $modalInstance.dismiss('cancel');
-            });
-        };
+    //    self.savePartRequest = function () {
+    //        PartRequestService.addPartRequest(self.part)
+    //        .then(function () {
+    //            $modalInstance.dismiss('cancel');
+    //        });
+    //    };
 
-        //currently unused
-        self.ok = function () {
-            $modalInstance.close('close');
-        };
-        //modal cancel with no action
-        self.cancel = function () {
-            $modalInstance.dismiss('cancel');
-        };
-    });
+    //    //currently unused
+    //    self.ok = function () {
+    //        $modalInstance.close('close');
+    //    };
+    //    //modal cancel with no action
+    //    self.cancel = function () {
+    //        $modalInstance.dismiss('cancel');
+    //    };
+    //});
 })();

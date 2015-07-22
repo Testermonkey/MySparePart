@@ -208,6 +208,26 @@
     <Compile Include="Migrations\201507210431485_inital.Designer.cs">
       <DependentUpon>201507210431485_inital.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507221736098_foo.cs" />
+    <Compile Include="Migrations\201507221736098_foo.Designer.cs">
+      <DependentUpon>201507221736098_foo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507221820577_foo1.cs" />
+    <Compile Include="Migrations\201507221820577_foo1.Designer.cs">
+      <DependentUpon>201507221820577_foo1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507222005047_foo2.cs" />
+    <Compile Include="Migrations\201507222005047_foo2.Designer.cs">
+      <DependentUpon>201507222005047_foo2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507222018535_foo3.cs" />
+    <Compile Include="Migrations\201507222018535_foo3.Designer.cs">
+      <DependentUpon>201507222018535_foo3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507222044460_foo4.cs" />
+    <Compile Include="Migrations\201507222044460_foo4.Designer.cs">
+      <DependentUpon>201507222044460_foo4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -263,6 +283,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\electronic-green-background-wallpaper_2062347838.jpg" />
+    <Content Include="Content\ihover.css" />
     <Content Include="Content\ihover.min.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\Supernice.css" />
@@ -284,7 +305,7 @@
     <Content Include="ngPartials\listParts.html" />
     <Content Include="ngPartials\modalDetails.html" />
     <Content Include="ngPartials\navBar.html" />
-    <Content Include="ngPartials\partRequest.html" />
+    <Content Include="ngPartials\requestPart.html" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-resource.js" />
     <Content Include="Scripts\angular-resource.min.js" />
@@ -365,6 +386,21 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201507210431485_inital.resx">
       <DependentUpon>201507210431485_inital.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507221736098_foo.resx">
+      <DependentUpon>201507221736098_foo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507221820577_foo1.resx">
+      <DependentUpon>201507221820577_foo1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507222005047_foo2.resx">
+      <DependentUpon>201507222005047_foo2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507222018535_foo3.resx">
+      <DependentUpon>201507222018535_foo3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507222044460_foo4.resx">
+      <DependentUpon>201507222044460_foo4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

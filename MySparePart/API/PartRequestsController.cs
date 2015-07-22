@@ -30,17 +30,23 @@ namespace MySparePart.API {
                 if (partRequest.Id == 0) { //check if new request or an edit
                     _db.PartRequests.Add(partRequest);
                     partRequest.RequestTimeStamp = DateTime.Now;
-                    partRequest.RequestUser.Id = HttpContext.Current.User.Identity.GetUserId();
-                    //   partRequest.PartOwner.Email = part.partOwner.Email;
+                    partRequest.RequestorEmail = HttpContext.Current.User.Identity.GetUserName();
+                    partRequest.RequestMailedTimeStamp = DateTime.Now;
+                    partRequest.RequestEmailSent = true;
+                    partRequest.RequestMailed = false;
+
+
+
+
                     _db.SaveChanges();
                 }
                 else {
                     var original = _db.PartRequests.Find(partRequest.Id);
-                    original.PartOwner = partRequest.PartOwner;
-                    original.RequestUser = partRequest.RequestUser;
-                    original.RequestTimeStamp = partRequest.RequestTimeStamp;
-                    original.RequestEmailSent = partRequest.RequestEmailSent;
-                    original.RequestMailed = partRequest.RequestMailed;
+                    //original.PartOwner = partRequest.PartOwner;
+                  //  original.RequestUser = partRequest.RequestUser;
+                    //original.RequestTimeStamp = partRequest.RequestTimeStamp;
+                  //  original.RequestEmailSent = partRequest.RequestEmailSent;
+                   // original.RequestMailed = partRequest.RequestMailed;
                     original.ItemId = partRequest.ItemId;
                     _db.SaveChanges();
 

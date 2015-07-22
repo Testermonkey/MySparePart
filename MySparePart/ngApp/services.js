@@ -3,7 +3,7 @@
     angular.module('PartApp').factory('PartRequestService', function ($resource, PART_API, PARTREQUEST_API) {
         var PartRequest = $resource(PARTREQUEST_API)
 
-        var _addPartRequest = function () {             // Create new PartRequest
+        var _addPartRequest = function (partRequest) {             // Create new PartRequest
             var newPartRequest = new PartRequest(partRequest);
             return newPartRequest.$save();
         };

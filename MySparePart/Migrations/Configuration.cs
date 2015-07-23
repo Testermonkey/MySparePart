@@ -14,14 +14,19 @@ namespace MySparePart.Migrations {
         }
 
         protected override void Seed(MySparePart.Models.ApplicationDbContext context) {
-         
+
+            var passwordHash = new PasswordHasher();
+            string password = passwordHash.HashPassword("Secret123!");
             var user = new ApplicationUser {
+                PasswordHash = password,
                 UserName = "foo@bar.com",
                 FirstName = "Alex",
                 LastName = "Underwood",
                 Email = "foo@bar.com",
                 EmailConfirmed = true,
-                PhoneNumber = "4257707387"
+                PhoneNumber = "4257707387",
+                SecurityStamp = Guid.NewGuid().ToString()
+
             };
 
             var userStore = new UserStore<ApplicationUser>(context);
@@ -29,10 +34,12 @@ namespace MySparePart.Migrations {
 
 
             if (userManager.FindByName(user.UserName) == null) {
-                userManager.Create(user, "Secret123!");
-                userManager.AddClaim(user.Id, new Claim("Admin","true"));
-            }
-            context.Users.AddOrUpdate(u => u.UserName, user);
+            context.Users.Add(user);
+            context.SaveChanges();
+            userManager.AddClaim(user.Id, new Claim("isAdmin", "true"));
+
+            };
+          // context.Users.AddOrUpdate(u => u.UserName, user);
 
 
             var Parts = new Part[]{

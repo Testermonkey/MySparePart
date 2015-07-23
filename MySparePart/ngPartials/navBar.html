@@ -26,11 +26,17 @@
                             Submit
                         </button>-->
                     </form>
-                    <ul class="nav navbar-nav navbar-right" id="navSignIn">
+                    <ul ng-controller="MenuController as menu"  class="nav navbar-nav navbar-right" id="navSignIn">
                         <li>
-                            <a href="#">Sign in</a>
-                        </li>
+                            <a href ng-if="!menu.showLogin()" ng-click="main.showLogin()">Sign in</a>
 
+                        </li>
+                        <li>
+                            <a href ng-if="!menu.showLogin()" ng-click="main.showRegister()">Register</a>
+                        </li>
+                        <li>
+                            <a href ng-if="menu.showLogin()" ng-click="menu.logout()">Sign out</a>
+                        </li>
                     </ul>
                 </div>
 

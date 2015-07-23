@@ -35,12 +35,8 @@ namespace MySparePart.API {
                     partRequest.RequestEmailSent = true;
                     partRequest.RequestMailed = false;
 
-
-
-
                     _db.SaveChanges();
-                }
-                else {
+                } else {
                     var original = _db.PartRequests.Find(partRequest.Id);
                     //original.PartOwner = partRequest.PartOwner;
                   //  original.RequestUser = partRequest.RequestUser;

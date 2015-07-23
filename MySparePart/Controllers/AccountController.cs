@@ -384,6 +384,14 @@ namespace MySparePart.Controllers
             base.Dispose(disposing);
         }
 
+        //GET claims 
+        [Route("GetIsAdmin")]
+        public bool GetIsAdmin() {
+            var user = this.User.Identity as ClaimsIdentity;
+            return user.HasClaim("isAdmin", "true");
+        }
+       
+
         #region Helpers
 
         private IAuthenticationManager Authentication

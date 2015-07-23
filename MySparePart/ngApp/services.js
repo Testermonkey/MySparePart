@@ -84,4 +84,15 @@
         };
     });
 
+    angular.module('PartApp').factory('UserService', function ($http, $location) {
+        //POST:Users
+        var _createUser = function (user) {
+            //calls off to the /controllers/AccountController-Register() 
+            return $http.post('api/account/register', { Name: user.name, FirstName: user.firstName, LastName: user.lastName, Email: user.email, Password: user.password, ConfirmPassword: user.password});
+        };
+        return {
+            createUser: _createUser,
+        };
+    });
+
 })();

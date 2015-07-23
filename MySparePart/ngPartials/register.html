@@ -1,0 +1,55 @@
+﻿<div class="container" id="formModal">
+    <div class="row">
+        <div class="col-xs-12">
+            <form name="registerForm">
+
+                <div class="form-group centered" ng-submit="modal.register">
+                    <label class="control-label col-sm-2">First Name:</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="modal.newUser.firstName" class="form-control centered" placeholder="FirstName" ng-required="true" autocomplete="on" />
+                    </div>
+                </div>
+                <br />
+
+                <div class="form-group centered">
+                    <label class="control-label col-sm-2">Last Name:</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="modal.newUser.lastName" class="form-control centered" placeholder="LastName" ng-required="true" autocomplete="on" />
+                    </div>
+                </div>
+                <br />
+
+                <div class="form-group centered">
+                    <label class="control-label col-sm-2">Email Address:</label>
+                    <div class="col-sm-10">
+                        <input type="email" ng-model="modal.newUser.email" class="form-control centered" placeholder="Email Address" ng-required="true" autocomplete="on" />
+                    </div>
+                </div>
+                <br />
+
+                <div class="form-group centered">
+                    <label class="control-label col-sm-2">Password:</label>
+                    <div class="col-sm-10">
+                        <input type="password" ng-model="modal.newUser.password" class="form-control centered" placeholder="Password" ng-required="true" ng-minlength="8" />
+                    </div>
+                    <label class="control-label col-sm-2">Confirm Password:</label>
+                    <div class="col-sm-10">
+                        <input type="password" ng-model="modal.newUser.confirmPassword" class="form-control centered" placeholder="Password" />
+                    </div>
+                </div>
+                <br /><br />
+
+                <div class="form=group">
+                    <div>
+                        <p ng-if="!rc.newUser.confirmPassword">Confirm Password Required</p>
+                        <p ng-if="rc.newUser.password != modal.newUser.confirmPassword">Passwords must match</p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <button class="btn btn-default btn-sm" ng-click="modal.register()">Register</button>
+             
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

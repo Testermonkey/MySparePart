@@ -110,9 +110,13 @@
                 self.message = "";
                 UserService.login(self.login);  // passes modal.login.email & password
                     setTimeout(function(){
-                        if (sessionStorage.getItem('UserToken')) {
+                        if (sessionStorage.getItem('userToken')) {
                             self.message = "Login successful!";
-                            setTimeout(function(){self.ok();}, 1000);
+                            setTimeout(function () {
+                                self.ok();
+                            }, 1000);
+                                $modalInstance.dismiss('cancel');
+                           
                         }else{
                             self.message = "Authentication failed Please reinput valid credentials.";
                         }

@@ -108,7 +108,7 @@
             if ((self.login.email != null) && (self.login.password != null)// dont attempt with empty fields
                 && (self.template == '/ngPartials/login.html')) {  // dont appempt if we have left login
                 self.message = "";
-                UserService.login(self.login);
+                UserService.login(self.login);  // passes modal.login.email & password
                     setTimeout(function(){
                         if (sessionStorage.getItem('UserToken')) {
                             self.message = "Login successful!";
@@ -145,14 +145,14 @@
         };
     });
 
-    angular.module('PartApp').controller('MenuController', function ($location, $http) {
+    angular.module('PartApp').controller('MenuController', function ($location, UserService, $http) {
         var self = this;
         self.showLogin = function () {
             return sessionStorage.getItem('userToken');
         };
 
         self.logout = function () {
-            UserService.logout;
+            UserService.logout();
             $location.path('/');
         };
     });

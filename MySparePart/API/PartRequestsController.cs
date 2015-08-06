@@ -7,6 +7,7 @@ using System.Net.Http;
 using Microsoft.AspNet.Identity;
 using System.Web;
 using System.Web.Http;
+using System.Security.Claims;
 
 namespace MySparePart.API {
     public class PartRequestsController : ApiController {
@@ -20,14 +21,21 @@ namespace MySparePart.API {
         public IList<PartRequest> GetPartRequests() {       //List
             var currentUser = new ApplicationUser();
             currentUser.Id = HttpContext.Current.User.Identity.GetUserId();
-            //get this sorted
+            var user = this.User.Identity as ClaimsIdentity;
 
-            return _db.PartRequests.ToList();
+            if (user.HasClaim(ClaimTypes.Role, "isAdmin")) {   // show admin everything
+                return _db.PartRequests.ToList();
+            }
+            else { //show user only their own request
+                return _db.PartRequests.Where(n => n.OwnerEmail == currentUser.Email).Where(n => n.RequestorEmail == currentUser.Email).ToList();
+            }
         }
 
-      public HttpResponseMessage PostPartRequests(PartRequest partRequest) { //Create Edit
+
+        public HttpResponseMessage PostPartRequests(PartRequest partRequest) { //Create Edit
             if (ModelState.IsValid) {
                 if (partRequest.Id == 0) { //check if new request or an edit
+
                     _db.PartRequests.Add(partRequest);
                     partRequest.RequestTimeStamp = DateTime.Now;
                     partRequest.RequestorEmail = HttpContext.Current.User.Identity.GetUserName();
@@ -36,14 +44,21 @@ namespace MySparePart.API {
                     partRequest.RequestMailed = false;
 
                     _db.SaveChanges();
-                } else {
+
+                }
+                else {
+                    //Start - Guard clauses
+                    if ( !(HttpContext.Current.User.IsInRole("isAdmin"))) { throw new System.ArgumentException("Cannot edit unless Admin", "original"); };
+                    //End - Guard clauses
+
                     var original = _db.PartRequests.Find(partRequest.Id);
-                    //original.PartOwner = partRequest.PartOwner;
-                  //  original.RequestUser = partRequest.RequestUser;
-                    //original.RequestTimeStamp = partRequest.RequestTimeStamp;
-                  //  original.RequestEmailSent = partRequest.RequestEmailSent;
-                   // original.RequestMailed = partRequest.RequestMailed;
+                    original.OwnerEmail = partRequest.OwnerEmail;
+                    original.RequestorEmail = partRequest.RequestorEmail;
+                    original.RequestTimeStamp = partRequest.RequestTimeStamp;
+                    original.RequestEmailSent = partRequest.RequestEmailSent;
+                    original.RequestMailed = partRequest.RequestMailed;
                     original.ItemId = partRequest.ItemId;
+
                     _db.SaveChanges();
 
                 }
@@ -52,12 +67,19 @@ namespace MySparePart.API {
             return Request.CreateErrorResponse(HttpStatusCode.BadRequest, this.ModelState);
         }
 
-                // [Authorize]
+        [Authorize]
         public void DeletePartRequest(int id) {
+            var user = this.User.Identity as ClaimsIdentity;
             var original = _db.PartRequests.Find(id);
-            _db.PartRequests.Remove(original);
-            _db.SaveChanges();
-        }
+            //Start - Guard clauses
+            if (!(HttpContext.Current.User.IsInRole("isAdmin"))) { throw new System.ArgumentException("Cannot edit unless Admin", "original"); };
+            //End - Guard clauses
 
+            if (user.HasClaim(ClaimTypes.Role, "isAdmin")) {   // if admin delete
+                _db.PartRequests.Remove(original);
+                _db.SaveChanges();
+            }
+
+        }
     }
 }

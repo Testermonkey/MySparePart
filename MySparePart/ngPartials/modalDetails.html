@@ -1,5 +1,5 @@
 ﻿<div class="container">
-    <h3 class="modal-title">Details Modal</h3>
+    <h3 class="modal-title">Details</h3>
 
     {{modal.part.name}}
     <br />
@@ -20,10 +20,10 @@
     <br />
 
     <!-- if PartOwner && IsAuthenticated show this -->
-    <a ng-click="modal.deletePart()"> client delete(mark as hidden) </a>
+    <a ng-click="modal.deletePart()"> Delete? </a>
     <br />
 
     <!--only admins get to see this-->
-    <a ng-click="modal.adminPartDelete()">adminPartDelete</a>
+    <a ng-click="modal.adminPartDelete()">Admin Part Delete</a>
     <br />
 </div>

@@ -88,11 +88,41 @@
         //POST:Users
         var _createUser = function (user) {
             //calls off to the /controllers/AccountController-Register() 
-            return $http.post('api/account/register', { Name: user.name, FirstName: user.firstName, LastName: user.lastName, Email: user.email, Password: user.password, ConfirmPassword: user.password});
+            return $http.post('api/account/register', { Name: user.name, FirstName: user.firstName, LastName: user.lastName, Email: user.email, Password: user.password, ConfirmPassword: user.password });
         };
+
+        var _login = function (user) {
+            //creates the data string to pass to post
+            var data = "grant_type=password&username=" + user.email + "&password=" + user.password;
+
+            $http.post('/Token', data, {
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }).success(function (result) {
+                sessionStorage.setItem('userToken', result.access_token);
+                $http.defaults.headers.common['Authorization'] = 'bearer ' + result.access_token;
+                $http.get('/api/account/getisadmin')
+                    .success(function (isAdmin) {
+                        if (isAdmin) {
+                            sessionStorage.setItem('isAdmin', 'true')
+                        }
+                    });
+            });
+        };
+
+        var _logout = function () {
+            sessionStorage.removeItem('userToken');
+            sessionStorage.removeItem('isAdmin');
+        };
+
+
         return {
             createUser: _createUser,
+            login: _login,
+            logout: _logout
         };
+
+
+
     });
 
 })();

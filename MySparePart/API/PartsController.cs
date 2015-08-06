@@ -7,74 +7,56 @@ using System.Net.Http;
 using Microsoft.AspNet.Identity;
 using System.Web;
 using System.Web.Http;
-
+using System.Security.Claims;
 
 namespace MySparePart.API {
     public class PartsController : ApiController {
 
+        //mapping to the Parts Database
         private ApplicationDbContext _db = new ApplicationDbContext();
 
-
-
-        //    //// need to logout/login again to load claims
-        //    //var claimsUser = this.User as ClaimsPrincipal;
-        //    //var claims = claimsUser.Claims.ToList();
-
-
-
         public IList<Part> GetParts() {
-            var currentUser = new ApplicationUser();
-            currentUser.Id = HttpContext.Current.User.Identity.GetUserId();
-
-            //need to logout/login again to load claims
-            //var claimsUser = this.User as ClaimsPrincipal;
-            //var claims = claimsUser.Claims.ToList();
-
-            //if (HttpContext.Current.User.IsInRole("Admin")) {
-            //    return _db.Query<Part>().ToList();  //Change these to return views with querys
-            //}
-            //if (HttpContext.Current.User.IsAuthenticated()) {
-            //    return _db.Query<Part>().Where(n => n.PartIsHidden == false).ToList();
-            //}
-            //else {
-            //    return _db.Query<Part>().Where(n => n.PartIsHidden == false).Where(n => n.PartOwner.Id != currentUser.Id.ToString()).ToList();
-            //}
-            return _db.Parts.ToList();
+            var user = this.User.Identity as ClaimsIdentity;
+            if (user.HasClaim(ClaimTypes.Role, "isAdmin")) {
+                return _db.Parts.ToList(); // show admin everything
+            }
+            else {
+                return _db.Parts.Where(n => n.PartIsHidden == false).Where(n => n.PartIsDeleted ==false).ToList(); // hide deleted and hidden
+            }
         }
 
-
-        //[Authorize(Users='bob')]
-        //[Authorize(Roles='bob')]
-        // [Authorize]
-
+        [Authorize]  // need to be a user to add / edit part
         public HttpResponseMessage PostParts(Part part) {
 
             if (ModelState.IsValid) {
-                if (part.Id == 0) {                 // part is new - create new fields
+                if (part.Id == 0) { // part is new - create new fields
                     _db.Parts.Add(part);
                     part.PartIsLocked = true;
                     part.PartIsDeleted = true;
                     part.PartIsHidden = true;
                     part.ItemPostDate = DateTime.Now;
-                    //   part.PartOwner.UserName = HttpContext.Current.User.Identity.Name;  //fix permissions then uncomment
+                    part.OwnerEmail = HttpContext.Current.User.Identity.Name;  //fix permissions then uncomment
                     _db.SaveChanges();
                 }
-                else {                              // part not new - update fields
-                    //convert to unit tests
-                    //add a try catch
-                    //Guard clauses
-                    //if (!(part.PartOwner.UserName == HttpContext.Current.User.Identity.Name) || !(HttpContext.Current.User.IsInRole("Admin"))) { throw new System.ArgumentException("Cannot edit unless partOwner or Admin", "original"); };
-                    //if (HttpContext.Current.User.Identity.IsAuthenticated) { throw new System.ArgumentException("Cannot edit unless authenticated", "original"); };
-                    //if (part.PartIsHidden) { throw new System.ArgumentException("Cannot eidt hidden part", "original"); };
-                    //if (part.PartIsDeleted) { throw new System.ArgumentException("Cannot edit deleted part", "original"); };
+                else {  // part not new - update fields
+
+                    //Start - Guard clauses
+                    if (!(part.OwnerEmail == HttpContext.Current.User.Identity.Name) || !(HttpContext.Current.User.IsInRole("isAdmin"))) { throw new System.ArgumentException("Cannot edit unless partOwner or Admin", "original"); };
+                    if (HttpContext.Current.User.Identity.IsAuthenticated) { throw new System.ArgumentException("Cannot edit unless authenticated", "original"); };
+                    if (part.PartIsHidden) { throw new System.ArgumentException("Cannot eidt hidden part", "original"); };
+                    if (part.PartIsDeleted) { throw new System.ArgumentException("Cannot edit deleted part", "original"); };
+                    //End - Guard clauses
+
                     var original = _db.Parts.Find(part.Id);
                     original.Name = part.Name;
                     original.PartNumber = part.PartNumber;
                     original.Description = part.Description;
                     original.Quanity = part.Quanity;
                     original.ShippingSize = part.ShippingSize;
-                    original.Category = part.Category;
+                    // original.Category = part.Category; //not in use
                     original.PartIsDeleted = part.PartIsDeleted;
+                    original.PartIsHidden = part.PartIsHidden;
+                    original.PartIsLocked = part.PartIsLocked;
                     _db.SaveChanges();
                 }
                 return Request.CreateResponse(HttpStatusCode.Created, part);
@@ -82,26 +64,37 @@ namespace MySparePart.API {
             return Request.CreateErrorResponse(HttpStatusCode.BadRequest, this.ModelState);
         }
 
-        public Part GetPart(int id) {
+        public Part GetPart(int id) { //Get one Part
             return _db.Parts.Find(id);
         }
-        //recomended
-        // [Authorize]
-        public void DeletePart(int id) {
-            var original = _db.Parts.Find(id);
-            _db.Parts.Remove(original);
-            _db.SaveChanges();
-        }
 
-        //use with caution 
-        // [Authorize]
-        //[Route("removeIsDeleted")]
-        public void DeleteAll() {
-            var DelList = _db.Parts.Where(n => n.PartIsDeleted == true).ToList();
-            foreach (Part part in DelList) {
-                _db.Parts.Remove(part);
+
+        [Authorize]
+        public void DeletePart(int id) {
+            var user = this.User.Identity as ClaimsIdentity;
+            // Guard clause
+            if (!(HttpContext.Current.User.IsInRole("isAdmin"))) { throw new System.ArgumentException("Cannot delete unless Admin", "original"); };
+
+            if (user.HasClaim(ClaimTypes.Role, "isAdmin")) {
+                var original = _db.Parts.Find(id);
+                _db.Parts.Remove(original);
+                _db.SaveChanges();
             }
-            _db.SaveChanges();
+        }
+       
+        [Authorize]
+        public void DeleteAll() {   //use with caution
+            var user = this.User.Identity as ClaimsIdentity;
+            // Guard clause
+            if (!(HttpContext.Current.User.IsInRole("isAdmin"))) { throw new System.ArgumentException("Cannot delete unless Admin", "original"); };
+
+            if (user.HasClaim(ClaimTypes.Role, "isAdmin")) {
+                var DelList = _db.Parts.Where(n => n.PartIsDeleted == true).ToList();
+                foreach (Part part in DelList) {
+                    _db.Parts.Remove(part);
+                }
+                _db.SaveChanges();
+            }
         }
 
         public void clientDeletePart(int id) {
@@ -110,51 +103,5 @@ namespace MySparePart.API {
             original.PartIsHidden = true;
             _db.SaveChanges();
         }
-
-        //[Authorize]
-        // public void RemoveIsDeleted(Parts parts);
-
-        //public IList<Part> SortRequestsByOwner(string user) {
-        //    return _db.Query<Part>().Where(n => n.PartOwner.UserName == user).ToList();
-        //    //Show all request by owner
-        //    //only for PwrUser/Admin
-        //}
-
-        //public IList<Part> SortPartsByOwner(string user) {
-        //    return _db.Query<Part>().Where(n => n.PartOwner.UserName == user).ToList();
-        //    //Show all request by owner
-        //    //only for PwrUser/Admin
-        //}
-        //public IList<Part> SortPartsByCatagory(string catagory) {
-        //    return _db.Query<Part>().Where(n => n.Catagory == catagory).Where(n => n.PartIsHidden == false).ToList();
-        //    //Show all parts by catagory
-        //    // all users
-        //}
-
-        //public IList<Part> TitleSearchPartsByKeyWord(string keyword) {
-        //    return _db.Query<Part>().Where(n => n.Name.Contains(keyword)).Where(n => n.PartIsHidden == false).ToList();
-        //    //Search parts list by word search
-        //    // all users
-        //}
-
-        //public IList<Part> DescriptionSearchPartsByKeyWord(string keyword) {
-        //    return _db.Query<Part>().Where(n => n.Description.Contains(keyword)).Where(n => n.PartIsHidden == false).ToList();
-        //    //Search parts list by word search
-        //    // all users
-        //}
-        //public bool PartRequestSendEmail(PartRequest partRequest) {
-
-        //    if (partRequest.RequestMailed) {
-        //        //send mail for request mailed
-
-        //        return true;
-        //    }
-        //    else {
-        //        // it is a new part request
-        //        // send mail for new request
-        //        // mail goes to both partOwner and RequestUser
-        //    }
-        //    return true;
-        //}
     }
 }

@@ -1,10 +1,10 @@
 ﻿(function () {
-
-
-    angular.module('PartApp').controller('PartListController', function ($location, PartService, $modal) {
+    
+    angular.module('PartApp').controller('PartListController', function ($location, UserService, PartService, $modal) {
 
         var self = this;
         self.parts = PartService.getParts();
+      //  self.User = UserService.getUser();
 
         // key up search for the main page - not implimented
         self.filterParts = function (parts) {
@@ -14,6 +14,7 @@
             return part.name.toLowerCase().startsWith(self.search.toLowerCase()) || part.partNumber.toLowerCase().startsWith(self.search.toLowerCase());
         };
 
+        // 
         self.isAdmin = function () {
             return sessionStorage.getItem('isAdmin')
         };
@@ -82,13 +83,15 @@
         };
     });
 
-    angular.module('PartApp').controller('LoginController', function ($location, $http, $modal, $modalInstance) {
+    angular.module('PartApp').controller('LoginController', function (UserService, $location, $http, $modal, $modalInstance) {
         var self = this;
         self.template = '/ngPartials/login.html'
+
         //modal cancel with no action
         self.cancel = function () {
             $modalInstance.close('close');
         };
+
         self.registerPage = function () {
             $modalInstance.close('close')
             //move to RegisterController
@@ -102,29 +105,21 @@
 
         self.login = function () {
             //creates the data string to pass to post
-            if ((self.loginEmail != null) && (self.loginPassword != null)// dont attempt with empty fields
+            if ((self.login.email != null) && (self.login.password != null)// dont attempt with empty fields
                 && (self.template == '/ngPartials/login.html')) {  // dont appempt if we have left login
-                var data = "grant_type=password&username=" + self.loginEmail + "&password=" + self.loginPassword;
-
-                $http.post('/Token', data, {
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-                }).success(function (result) {
-                    sessionStorage.setItem('userToken', result.access_token);
-                    $http.defaults.headers.common['Authorization'] = 'bearer ' + result.access_token;
-                    $http.get('/api/account/getisadmin')
-                        .success(function (isAdmin) {
-                            if (isAdmin) {
-                                sessionStorage.setItem('isAdmin', 'true')
-                            }
-                            $location.path('/');
-                        })
-                        .then(function () {
-                            $modalInstance.dismiss('cancel')
-                        });
-                });
+                self.message = "";
+                UserService.login(self.login);
+                    setTimeout(function(){
+                        if (sessionStorage.getItem('UserToken')) {
+                            self.message = "Login successful!";
+                            setTimeout(function(){self.ok();}, 1000);
+                        }else{
+                            self.message = "Authentication failed Please reinput valid credentials.";
+                        }
+                    }, 3000)
+                }
             };
-        };
-    });
+        });
 
     angular.module('PartApp').controller('RegisterController', function ($location, $http, UserService, $modal, $modalInstance) {
 
@@ -155,9 +150,9 @@
         self.showLogin = function () {
             return sessionStorage.getItem('userToken');
         };
+
         self.logout = function () {
-            sessionStorage.removeItem('userToken');
-            sessionStorage.removeItem('isAdmin');
+            UserService.logout;
             $location.path('/');
         };
     });

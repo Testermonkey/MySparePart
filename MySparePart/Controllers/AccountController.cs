@@ -297,6 +297,7 @@ namespace MySparePart.Controllers
                 state = null;
             }
 
+
             foreach (AuthenticationDescription description in descriptions)
             {
                 ExternalLoginViewModel login = new ExternalLoginViewModel
@@ -321,22 +322,24 @@ namespace MySparePart.Controllers
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]
-        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
-        {
-            if (!ModelState.IsValid)
-            {
+        public async Task<IHttpActionResult> Register(RegisterBindingModel model) {
+
+            var context = new ApplicationDbContext();
+            var userStore = new UserStore<ApplicationUser>(context);
+            var userManager = new ApplicationUserManager(userStore);
+
+            if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-
-            if (!result.Succeeded)
-            {
+            if (!result.Succeeded) {
                 return GetErrorResult(result);
-            }
+                }
 
+            userManager.AddClaim(user.Id, new Claim(model.Email.ToString(), "true"));
             return Ok();
         }
 

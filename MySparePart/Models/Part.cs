@@ -6,10 +6,8 @@ using System.Web;
 
 namespace MySparePart.Models {
     public class Part {
+
         public int Id { get; set; }
-        public string OwnerEmail { get; set; }
-        public DateTime ItemPostDate { get; set; }
-        public string ImagePath { get; set; }
 
         [Required(ErrorMessage = "Part name required")]
         [StringLength(50, ErrorMessage = "Less then 50 characters")]
@@ -21,18 +19,15 @@ namespace MySparePart.Models {
 
         [Required(ErrorMessage = "Quanity required")]
         public int Quanity { get; set; }
-
+        public DateTime ItemPostDate { get; set; }
+        public string ImagePath { get; set; }
         public string PartNumber { get; set; }
-
+        public string OwnerEmail { get; set; }
         public string ShippingSize { get; set; }
-
         public bool PartIsHidden { get; set; }
-
         public bool PartIsLocked { get; set; }
-
         public bool PartIsDeleted { get; set; }
-
-        public string Category { get; set; }
+        //public string Category { get; set; } not in use
 
         public ICollection<PartRequest> PartRequest { get; set; } // For request tracking
         public Part() {

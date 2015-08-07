@@ -1,29 +1,54 @@
 ﻿<div class="container">
     <h3 class="modal-title">Details</h3>
+    <div>
+        {{modal.part.name}}
+        <br />
+        {{modal.part.partNumber}}
+        <br />
+        {{modal.part.description}}
+        <br />
+        {{modal.part.ownerEmail}}
+        <br />
+    </div>
+    <div ng-if="modal.isAdmin()">
+        {{modal.part.id}}
+        <br />
+        {{modal.part.quanity}}
+        <br />
+        {{modal.part.imagePath}}
+        <br />
+        {{modal.part.shippingSize}}
+        <br />
+        {{modal.part.partIsHidden}}
+        <br />
+        {{modal.part.partIsLocked}}
+        <br />
+        {{modal.part.partIsDeleted}}
+        <br />
+    </div>
 
-    {{modal.part.name}}
-    <br />
-    {{modal.part.partNumber}}
-    <br />
-    {{modal.part.description}}
-    <br />
+    <div ng-if=" modal.isUserName() == modal.part.ownerEmail || modal.isAdmin()">
+        <!-- if Admin or PartOwner show this -->
+        <a ng-click="modal.edit()"> Edit </a>
+        <br />
+    </div>
 
+    <div ng-if="modal.isUserName() && modal.isUserName() != modal.part.ownerEmail">
+        <!-- if !PartOwner && IsAuthenticated show this -->
+        <a ng-click="modal.request(modal.part.id)">Request </a>
+        <br />
+    </div>
 
+    <div ng-if=" modal.isUserName() == modal.part.ownerEmail">
+        <!-- if PartOwner && IsAuthenticated show this -->
+        <a ng-click="modal.deletePart()">Delete? </a>
+        <br />
+    </div>
 
+    <div ng-if="modal.isAdmin()">
+        <!--only admins get to see this-->
+        <a ng-click="modal.adminPartDelete()">Admin Part Delete</a>
+        <br />
+    </div>
 
-    <!-- if PartOwner show this -->
-    <a ng-click="modal.edit()"> edit </a>
-    <br />
-
-    <!-- if !PartOwner && IsAuthenticated show this -->
-    <a ng-click="modal.request(modal.part.id)">request </a><br />
-    <br />
-
-    <!-- if PartOwner && IsAuthenticated show this -->
-    <a ng-click="modal.deletePart()"> Delete? </a>
-    <br />
-
-    <!--only admins get to see this-->
-    <a ng-click="modal.adminPartDelete()">Admin Part Delete</a>
-    <br />
 </div>

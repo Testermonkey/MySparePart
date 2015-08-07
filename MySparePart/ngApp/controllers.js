@@ -4,7 +4,7 @@
 
         var self = this;
         self.parts = PartService.getParts();
-      //  self.User = UserService.getUser();
+        //  self.User = UserService.getUser();
 
         // key up search for the main page - not implimented
         self.filterParts = function (parts) {
@@ -19,6 +19,12 @@
             return sessionStorage.getItem('isAdmin')
         };
 
+        self.isUser = function () {
+            return sessionStorage.getItem('userToken')
+        };
+
+        self.userName = sessionStorage.getItem('userName');
+    
 
         //start the login modal with new LoginController
         self.showLogin = function () {
@@ -92,6 +98,10 @@
             $modalInstance.close('close');
         };
 
+        self.ok = function () {
+            $modalInstance.close('close');
+        };
+
         self.registerPage = function () {
             $modalInstance.close('close')
             //move to RegisterController
@@ -112,11 +122,8 @@
                     setTimeout(function(){
                         if (sessionStorage.getItem('userToken')) {
                             self.message = "Login successful!";
-                            setTimeout(function () {
-                                self.ok();
-                            }, 1000);
-                                $modalInstance.dismiss('cancel');
-                           
+                            setTimeout(function () { self.ok(); }, 1000);
+                            location.reload();
                         }else{
                             self.message = "Authentication failed Please reinput valid credentials.";
                         }
@@ -157,6 +164,7 @@
 
         self.logout = function () {
             UserService.logout();
+            location.reload();
             $location.path('/');
         };
     });
@@ -228,6 +236,14 @@
                 $modalInstance.dismiss('cancel');
             });
         };
+        self.isAdmin = function () {
+            return sessionStorage.getItem('isAdmin')
+        };
+
+        self.isUserName = function () {
+            return sessionStorage.getItem('userName')
+        };
+
 
         //client delete action - Sets IsDeleted && IsHidden to true
         self.deleteYes = function () {

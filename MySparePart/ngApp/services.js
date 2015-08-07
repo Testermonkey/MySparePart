@@ -99,6 +99,7 @@
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (result) {
                 sessionStorage.setItem('userToken', result.access_token);
+                sessionStorage.setItem('userName', user.email);
                 $http.defaults.headers.common['Authorization'] = 'bearer ' + result.access_token;
                 $http.get('/api/account/getisadmin')
                     .success(function (isAdmin) {
@@ -112,6 +113,7 @@
         var _logout = function () {
             sessionStorage.removeItem('userToken');
             sessionStorage.removeItem('isAdmin');
+            sessionStorage.removeItem('userName');
         };
 
 

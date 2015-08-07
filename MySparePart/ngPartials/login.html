@@ -1,11 +1,10 @@
 ﻿<div class="container" id="formModal">
     <div class="row">
         <div class="col-xs-12">
-
+           
             <form ng-submit="lc.login()">
-
                 <div class="form-group">
-                    <label class="control-label col-sm-2">Email Address:</label>
+                    <label class="control-label col-sm-2">Email:</label>
                     <div class="col-sm-10">
                         <input type="email" ng-model="modal.login.email" class="form-control" placeholder="Email" />
                     </div>
@@ -28,6 +27,7 @@
                     <div class="col-sm-4">
                         <button class="btn btn-default btn-sm" ng-click="modal.login()">Login</button>
                     </div>
+                    
                 </div>
             </form>
         </div>

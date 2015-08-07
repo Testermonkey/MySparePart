@@ -12,7 +12,7 @@
                 <div ng-controller="MenuController as menu" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="active">
-                            <a ng-click="main.addPart()">AddPart</a>
+                            <a ng-if="main.isUser()" ng-click="main.addPart()">AddPart</a>
                         </li>
                         <li>
                             <a ng-if="main.isAdmin()" ng-click="main.adminPartsDelete()">AdminPartsDelete</a>
@@ -25,15 +25,21 @@
                     </form>
 
                     <ul ng-controller="MenuController as menu" class="nav navbar-nav navbar-right" id="navSignIn">
-                        <li>
-                            <a href ng-if="!menu.showLogin()" ng-click="main.showLogin()">Sign in</a>
+                        <li ng-if ="!menu.showLogin()">
+                            <a href ng-click="main.showRegister()">Register</a>
                         </li>
-                        <li>
-                            <a href ng-if="!menu.showLogin()" ng-click="main.showRegister()">Register</a>
+                        <li ng-if="menu.showLogin()">
+                            <a href ng-click="main.showUserInfo()">{{main.userName}}</a>
                         </li>
-                        <li>
-                            <a href ng-if="menu.showLogin()" ng-click="menu.logout()">Sign out</a>
+
+                        <li ng-if="!menu.showLogin()">
+                            <a href ng-click="main.showLogin()">Sign in</a>
                         </li>
+
+                        <li ng-if="menu.showLogin()">
+                            <a href ng-click="menu.logout()">Sign out</a>
+                        </li>
+
                     </ul>
                 </div>
 

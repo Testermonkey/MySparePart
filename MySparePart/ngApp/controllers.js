@@ -263,8 +263,9 @@
         self.savePartRequest = function () {
             var model = {};
             model.itemId = self.part.id;
-            model.ownerEmail = self.part.ownerEmail;
 
+            model.ownerEmail = self.part.ownerEmail;
+            model.requestorEmail = sessionStorage.getItem('userName'); // this is a hack, I want to pull current user email on the server side
             PartRequestService.addPartRequest(model)
 
             .then(function () {

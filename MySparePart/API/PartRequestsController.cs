@@ -35,10 +35,9 @@ namespace MySparePart.API {
         public HttpResponseMessage PostPartRequests(PartRequest partRequest) { //Create Edit
             if (ModelState.IsValid) {
                 if (partRequest.Id == 0) { //check if new request or an edit
-
                     _db.PartRequests.Add(partRequest);
                     partRequest.RequestTimeStamp = DateTime.Now;
-                    partRequest.RequestorEmail = HttpContext.Current.User.Identity.GetUserName();
+                   // partRequest.RequestorEmail = User.Identity.GetUserName(); //currently pulling this from the conttrollers.js 268
                     partRequest.RequestMailedTimeStamp = DateTime.Now;
                     partRequest.RequestEmailSent = true;
                     partRequest.RequestMailed = false;

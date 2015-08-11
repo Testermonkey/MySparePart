@@ -35,7 +35,7 @@ namespace MySparePart.API {
                     part.PartIsDeleted = true;
                     part.PartIsHidden = true;
                     part.ItemPostDate = DateTime.Now;
-                    part.OwnerEmail = HttpContext.Current.User.Identity.Name;  //fix permissions then uncomment
+                    part.OwnerEmail = HttpContext.Current.User.Identity.Name.ToString();  //fix permissions then uncomment
                     _db.SaveChanges();
                 }
                 else {  // part not new - update fields
